@@ -126,9 +126,14 @@ python arithmetic_sequence.py 7
 
 ---
 
-## 6. Cara Penggunaan
+## 6. Cara Penggunaan & Tangkapan Layar (Screenshots)
 
-### Master Ruangan
+### Halaman Login
+Setelah database dibuat, akses halaman login Odoo pada [http://localhost:8069](http://localhost:8069):
+
+![Login Odoo](docs/screenshots/01_odoo_login.png)
+
+### Master Ruangan (`room.room`)
 
 1. Buka menu **Room Booking** → **Master Data** → **Master Ruangan**.
 2. Klik **New** untuk menambah ruangan baru.
@@ -139,17 +144,25 @@ python arithmetic_sequence.py 7
    - **Foto Ruangan** (upload gambar)
    - **Kapasitas Ruangan** (angka ≥ 0)
 4. Klik **Save**.
-5. Gunakan tampilan **Kanban** untuk melihat ruangan dalam format kartu visual.
+5. Gunakan tampilan **List** atau **Kanban** untuk melihat data ruangan.
 
-### Membuat Pemesanan Ruangan
+**Tampilan Daftar Master Ruangan (List View):**
+![Master Ruangan List](docs/screenshots/02_master_ruangan_list.png)
+
+**Tampilan Detail Master Ruangan (Form View):**
+![Master Ruangan Form](docs/screenshots/03_master_ruangan_form.png)
+
+---
+
+### Membuat Pemesanan Ruangan (`room.booking`)
 
 1. Buka menu **Room Booking** → **Pemesanan** → **Pemesanan Ruangan**.
 2. Klik **New**.
 3. Isi field yang wajib:
-   - **Ruangan** (pilih dari Master Ruangan)
+   - **Ruangan** (pilih dari Master Ruangan yang sudah dibuat)
    - **Nama Pemesan** (harus unik)
    - **Tanggal Pemesanan**
-4. Klik **Save** — Nomor Pemesanan akan terisi otomatis.
+4. Klik **Save** — Nomor Pemesanan otomatis terisi dengan format `BOOK/{TIPE}/{YYYYMMDD}/{SEQUENCE}`.
 
 ### Alur Status (Workflow)
 
@@ -159,8 +172,15 @@ python arithmetic_sequence.py 7
 └─────────┘   Pemesanan   └──────────┘   Pemesanan   └────────┘
 ```
 
-- Klik tombol **"Proses Pemesanan"** untuk memajukan status.
-- Setelah status **Done**, tombol tidak muncul lagi dan tidak dapat diproses lebih lanjut.
+- Klik tombol **"Proses Pemesanan"** untuk memajukan status:
+  - Dari **Draft** menjadi **On Going** (fields otomatis menjadi readonly).
+  - Dari **On Going** menjadi **Done** (tombol proses pemesanan disembunyikan).
+
+**Tampilan Form Pemesanan Ruangan (Status: On Going):**
+![Pemesanan Ruangan On Going](docs/screenshots/04_pemesanan_ruangan_form_ongoing.png)
+
+**Tampilan Daftar Pemesanan Ruangan (Status: Done):**
+![Pemesanan Ruangan Done](docs/screenshots/05_pemesanan_ruangan_list_done.png)
 
 ### Mencari Pemesanan
 
@@ -279,6 +299,14 @@ odoo-custom-module/
 ├── docker-compose.yml
 ├── odoo.conf
 ├── requirements.txt
+│
+├── docs/                           # Dokumentasi & Screenshot Pengujian
+│   └── screenshots/
+│       ├── 01_odoo_login.png
+│       ├── 02_master_ruangan_list.png
+│       ├── 03_master_ruangan_form.png
+│       ├── 04_pemesanan_ruangan_form_ongoing.png
+│       └── 05_pemesanan_ruangan_list_done.png
 │
 ├── arithmetic_sequence/            # Part 1 — Arithmetic Sequence
 │   ├── arithmetic_sequence.py      # Implementasi dan CLI
