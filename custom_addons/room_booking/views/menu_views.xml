@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_room_booking_root"
+              name="Room Booking"
+              sequence="30"/>
+
+    <!-- Pemesanan Section -->
+    <menuitem id="menu_booking_section"
+              name="Pemesanan"
+              parent="menu_room_booking_root"
+              sequence="10"/>
+
+    <menuitem id="menu_room_booking_list"
+              name="Pemesanan Ruangan"
+              parent="menu_booking_section"
+              action="action_room_booking"
+              sequence="10"/>
+
+    <!-- Master Data Section -->
+    <menuitem id="menu_master_data_section"
+              name="Master Data"
+              parent="menu_room_booking_root"
+              sequence="20"/>
+
+    <menuitem id="menu_room_room_list"
+              name="Master Ruangan"
+              parent="menu_master_data_section"
+              action="action_room_room"
+              sequence="10"/>
+
+</odoo>

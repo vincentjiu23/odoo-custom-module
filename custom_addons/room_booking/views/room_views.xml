@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!--                    ROOM: LIST (TREE) VIEW                     -->
+    <!-- ============================================================ -->
+
+    <record id="view_room_room_tree" model="ir.ui.view">
+        <field name="name">room.room.tree</field>
+        <field name="model">room.room</field>
+        <field name="arch" type="xml">
+            <tree string="Master Ruangan">
+                <field name="name"/>
+                <field name="room_type"/>
+                <field name="location"/>
+                <field name="capacity"/>
+                <field name="description" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!--                      ROOM: KANBAN VIEW                        -->
+    <!-- ============================================================ -->
+
+    <record id="view_room_room_kanban" model="ir.ui.view">
+        <field name="name">room.room.kanban</field>
+        <field name="model">room.room</field>
+        <field name="arch" type="xml">
+            <kanban sample="1">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="room_type"/>
+                <field name="location"/>
+                <field name="capacity"/>
+                <field name="photo"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <!-- Room Photo -->
+                            <div class="o_kanban_image_fill_left d-none d-md-block"
+                                 t-attf-style="background-image: url(data:image/png;base64,#{record.photo.raw_value})"
+                                 role="img"/>
+                            <div class="oe_kanban_details p-2">
+                                <!-- Room Name -->
+                                <div class="o_kanban_record_title fw-bold">
+                                    <field name="name"/>
+                                </div>
+                                <!-- Room Type -->
+                                <div class="text-muted small mt-1">
+                                    <i class="fa fa-building-o me-1"/>
+                                    <field name="room_type"/>
+                                </div>
+                                <!-- Location -->
+                                <div class="text-muted small">
+                                    <i class="fa fa-map-marker me-1"/>
+                                    Lokasi: <field name="location"/>
+                                </div>
+                                <!-- Capacity -->
+                                <div class="mt-2">
+                                    <span class="badge bg-primary">
+                                        <i class="fa fa-users me-1"/>
+                                        <field name="capacity"/> orang
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!--                       ROOM: FORM VIEW                         -->
+    <!-- ============================================================ -->
+
+    <record id="view_room_room_form" model="ir.ui.view">
+        <field name="name">room.room.form</field>
+        <field name="model">room.room</field>
+        <field name="arch" type="xml">
+            <form string="Master Ruangan">
+                <sheet>
+                    <field name="photo" widget="image" class="oe_avatar"
+                           options="{'preview_image': 'photo'}"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Nama Ruangan"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Informasi Ruangan">
+                            <field name="room_type"/>
+                            <field name="location"/>
+                            <field name="capacity"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Keterangan" name="description">
+                            <field name="description"
+                                   placeholder="Keterangan tambahan tentang ruangan..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!--                    ROOM: SEARCH VIEW                          -->
+    <!-- ============================================================ -->
+
+    <record id="view_room_room_search" model="ir.ui.view">
+        <field name="name">room.room.search</field>
+        <field name="model">room.room</field>
+        <field name="arch" type="xml">
+            <search string="Cari Ruangan">
+                <field name="name" string="Nama Ruangan"/>
+                <field name="room_type"/>
+                <field name="location"/>
+                <group expand="0" string="Group By">
+                    <filter string="Tipe Ruangan" name="group_type"
+                            context="{'group_by': 'room_type'}"/>
+                    <filter string="Lokasi" name="group_location"
+                            context="{'group_by': 'location'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!--                    ROOM: WINDOW ACTION                        -->
+    <!-- ============================================================ -->
+
+    <record id="action_room_room" model="ir.actions.act_window">
+        <field name="name">Master Ruangan</field>
+        <field name="res_model">room.room</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="search_view_id" ref="view_room_room_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tambahkan ruangan pertama Anda!
+            </p>
+            <p>
+                Kelola data master ruangan: nama, tipe, lokasi, kapasitas,
+                dan foto ruangan.
+            </p>
+        </field>
+    </record>
+
+</odoo>

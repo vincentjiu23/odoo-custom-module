@@ -1,8 +1,6 @@
-# Development and Testing dependencies for Odoo Custom Module
+# Development and linting tools (not required for Odoo runtime)
 flake8>=6.0.0
 pylint>=2.17.0
 pylint-odoo>=8.0.0
 black>=23.3.0
 isort>=5.12.0
-pytest>=7.3.0
-pytest-odoo>=1.0.0

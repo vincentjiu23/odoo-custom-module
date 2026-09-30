@@ -20,34 +20,25 @@ parts/
 sdist/
 var/
 wheels/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
 # Virtual environments
 .env
 .venv
 env/
 venv/
-ENV/
-env.bak/
-venv.bak/
 
-# IDE and Editor files
+# IDE / Editor files
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
-.project
-.pydevproject
-.settings/
 
 # Odoo specific
 *.log
-odoo.conf.local
 filestore/
 sessions/
 odoo-web-data/

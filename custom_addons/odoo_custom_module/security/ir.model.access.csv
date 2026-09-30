@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_custom_tag_user,custom.tag.user,model_custom_tag,group_custom_record_user,1,1,1,0
-access_custom_tag_manager,custom.tag.manager,model_custom_tag,group_custom_record_manager,1,1,1,1
-access_custom_record_user,custom.record.user,model_custom_record,group_custom_record_user,1,1,1,0
-access_custom_record_manager,custom.record.manager,model_custom_record,group_custom_record_manager,1,1,1,1
-access_custom_record_wizard_user,custom.record.wizard.user,model_custom_record_wizard,group_custom_record_user,1,1,1,1
