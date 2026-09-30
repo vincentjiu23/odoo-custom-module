@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_custom_root"
+              name="Custom Management"
+              web_icon="odoo_custom_module,static/description/icon.png"
+              sequence="20"/>
+
+    <!-- Operations Category -->
+    <menuitem id="menu_custom_operations"
+              name="Operations"
+              parent="menu_custom_root"
+              sequence="10"/>
+
+    <!-- Records Menu -->
+    <menuitem id="menu_custom_record_act"
+              name="Custom Records"
+              parent="menu_custom_operations"
+              action="action_custom_record"
+              sequence="10"/>
+
+    <!-- Configuration Category -->
+    <menuitem id="menu_custom_configuration"
+              name="Configuration"
+              parent="menu_custom_root"
+              groups="group_custom_record_manager"
+              sequence="90"/>
+
+    <!-- Tags Menu -->
+    <menuitem id="menu_custom_tag_act"
+              name="Tags"
+              parent="menu_custom_configuration"
+              action="action_custom_tag"
+              sequence="10"/>
+</odoo>

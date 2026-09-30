@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Module Category -->
+    <record id="module_category_custom_management" model="ir.module.category">
+        <field name="name">Custom Management</field>
+        <field name="description">Access rights for Custom Management Module</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- User Group -->
+    <record id="group_custom_record_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_custom_management"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Manager Group -->
+    <record id="group_custom_record_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_category_custom_management"/>
+        <field name="implied_ids" eval="[(4, ref('group_custom_record_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <!-- Multi-Company Record Rule -->
+    <record id="custom_record_multi_company_rule" model="ir.rule">
+        <field name="name">Custom Record Multi-Company</field>
+        <field name="model_id" ref="model_custom_record"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

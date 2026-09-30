@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action -->
+    <record id="action_report_custom_record" model="ir.actions.report">
+        <field name="name">Custom Record Dossier</field>
+        <field name="model">custom.record</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">odoo_custom_module.report_custom_record_template</field>
+        <field name="report_file">odoo_custom_module.report_custom_record_template</field>
+        <field name="print_report_name">'Record - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_custom_record"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report QWeb Template -->
+    <template id="report_custom_record_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+
+                        <div class="row mt-4 mb-3 border-bottom pb-2">
+                            <div class="col-8">
+                                <h2 class="text-primary font-weight-bold">
+                                    <span t-field="doc.name"/>
+                                </h2>
+                                <h4 class="text-muted">
+                                    <span t-field="doc.title"/>
+                                </h4>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="badge bg-secondary p-2 fs-6 text-uppercase" t-field="doc.state"/>
+                            </div>
+                        </div>
+
+                        <div class="row my-4">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <th class="text-muted" style="width: 40%;">Partner:</th>
+                                        <td><span t-field="doc.partner_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Assigned To:</th>
+                                        <td><span t-field="doc.user_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Date:</th>
+                                        <td><span t-field="doc.date"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <th class="text-muted" style="width: 40%;">Deadline:</th>
+                                        <td><span t-field="doc.deadline"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Estimated Amount:</th>
+                                        <td class="font-weight-bold text-success">
+                                            <span t-field="doc.amount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Tags:</th>
+                                        <td>
+                                            <t t-foreach="doc.tag_ids" t-as="tag">
+                                                <span class="badge bg-light text-dark border me-1" t-field="tag.name"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <t t-if="doc.description">
+                            <div class="card mb-3">
+                                <div class="card-header bg-light fw-bold">
+                                    Description &amp; Specification
+                                </div>
+                                <div class="card-body">
+                                    <div t-field="doc.description"/>
+                                </div>
+                            </div>
+                        </t>
+
+                        <t t-if="doc.notes">
+                            <div class="card mb-3">
+                                <div class="card-header bg-light fw-bold">
+                                    Internal Remarks
+                                </div>
+                                <div class="card-body">
+                                    <p t-field="doc.notes"/>
+                                </div>
+                            </div>
+                        </t>
+
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

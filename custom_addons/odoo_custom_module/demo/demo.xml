@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sample Tags -->
+        <record id="tag_urgent" model="custom.tag">
+            <field name="name">Urgent</field>
+            <field name="color">1</field>
+        </record>
+
+        <record id="tag_integration" model="custom.tag">
+            <field name="name">API Integration</field>
+            <field name="color">4</field>
+        </record>
+
+        <record id="tag_research" model="custom.tag">
+            <field name="name">Research &amp; Dev</field>
+            <field name="color">7</field>
+        </record>
+
+        <!-- Sample Records -->
+        <record id="record_demo_1" model="custom.record">
+            <field name="title">Enterprise API Gateway Sync</field>
+            <field name="partner_id" ref="base.res_partner_1"/>
+            <field name="amount">15000.0</field>
+            <field name="priority">2</field>
+            <field name="state">in_progress</field>
+            <field name="tag_ids" eval="[(4, ref('tag_urgent')), (4, ref('tag_integration'))]"/>
+            <field name="description">&lt;p&gt;Implement high-throughput bi-directional webhook connector between Odoo and external CRM.&lt;/p&gt;</field>
+            <field name="notes">Requires OAuth2 token rotation setup.</field>
+        </record>
+
+        <record id="record_demo_2" model="custom.record">
+            <field name="title">Quarterly Infrastructure Security Audit</field>
+            <field name="partner_id" ref="base.res_partner_2"/>
+            <field name="amount">8500.0</field>
+            <field name="priority">1</field>
+            <field name="state">draft</field>
+            <field name="tag_ids" eval="[(4, ref('tag_research'))]"/>
+            <field name="description">&lt;p&gt;Review database connection pooling, user ACL permissions, and multi-tenant security barriers.&lt;/p&gt;</field>
+        </record>
+    </data>
+</odoo>
